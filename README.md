@@ -34,7 +34,7 @@ docker compose -f docker-compose.jenkins.yml exec jenkins `
 
 Déverrouiller Jenkins, choisir l’installation des plugins suggérés (les plugins requis sont déjà inclus dans l’image), puis créer le compte administrateur. Docker Desktop doit rester démarré ; le socket Docker est monté pour permettre au pipeline de construire les images.
 
-Créer un job **Multibranch Pipeline** nommé `examjenkins`, avec la source GitHub `WTsotetzo/examjenkins` et le script `Jenkinsfile`. Le dépôt étant public, la découverte de branches ne requiert pas de credential GitHub. Comme Jenkins est local, un webhook GitHub ne peut pas l’atteindre sans endpoint public ; activer plutôt le scan périodique de la source (par exemple toutes les minutes).
+Le job multibranche `examjenkins-multibranch` est déjà configuré pour le dépôt public `https://github.com/WTsotetzo/examjenkins.git`, avec `Jenkinsfile` comme script et un scan périodique de la source. Jenkins utilise la source Git directe afin d’éviter les limites de quota de l’API GitHub. Comme Jenkins est local, un webhook GitHub ne peut pas l’atteindre sans endpoint public.
 
 Créer les credentials Jenkins suivants (type et identifiant exacts) :
 
