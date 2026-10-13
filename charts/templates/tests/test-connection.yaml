@@ -11,5 +11,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['{{ include "fastapiapp.fullname" . }}:{{ .Values.service.port }}/api/v1/checkapi']
+      args: ['http://{{ include "fastapiapp.fullname" . }}:{{ .Values.service.port }}/api/v1/movies/docs']
   restartPolicy: Never

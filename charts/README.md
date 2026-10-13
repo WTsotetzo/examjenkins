@@ -1,29 +1,7 @@
-### How to create helm chart from manifests
-To create helm chart run following command and edit values, chart files and files in templates directory based on your k8s manifests:
+# Chart Helm
 
-```
-$ helm create fastapiapp
-```
+Ce chart déploie les services Cast et Movie, leurs StatefulSets PostgreSQL persistants et un reverse proxy Nginx.
 
-Now move to the fastapiapp directory and run tree command you should see:
+Avant l’installation, créer le namespace et un Secret `app-db-credentials` contenant `POSTGRES_USER`, `POSTGRES_PASSWORD`, `CAST_DATABASE_URI` et `MOVIE_DATABASE_URI`. Le Jenkinsfile crée ce Secret à partir du credential `db-credentials-<environnement>`. Les images Cast et Movie ainsi que leurs tags sont des valeurs surchargeables, voir `values.yaml`.
 
-```
-$ tree
-.
-├── charts
-├── Chart.yaml
-├── README.md
-├── templates
-│   ├── deployment.yaml
-│   ├── _helpers.tpl
-│   ├── hpa.yaml
-│   ├── ingress.yaml
-│   ├── NOTES.txt
-│   ├── serviceaccount.yaml
-│   ├── service.yaml
-│   └── tests
-│       └── test-connection.yaml
-└── values.yaml
-```
-
-Now you can edit Chart.yaml and modify appVersion and chart version. You can edit values.yaml and provide image registry, name and tag and whatever you want.
+Le Service Nginx s’appelle `app-fastapiapp` avec le nom de release utilisé dans le Jenkinsfile. L’accès extérieur est ClusterIP par défaut ; utiliser un Ingress configuré ou `kubectl port-forward` pour accéder aux API.

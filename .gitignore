@@ -2,3 +2,5 @@ env
 __pycache__
 .vscode
 .idea
+.jenkins-app-db-credentials-*.yaml
+.jenkins-kubeconfig
