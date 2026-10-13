@@ -58,7 +58,7 @@ powershell -NoProfile -ExecutionPolicy Bypass `
 
 Téléverser ensuite `.jenkins-kubeconfig` comme credential `kubeconfig` de type **Secret file**. Ce fichier contient des clés privées : il est ignoré par Git, ne pas le partager ni le committer. Le script conserve l’authentification et l’autorité de certification du kubeconfig courant, mais utilise `host.docker.internal` pour joindre le cluster depuis Jenkins.
 
-Dans le job, définir `DOCKERHUB_NAMESPACE` avec votre namespace DockerHub. Créer les dépôts DockerHub `cast-service` et `movie-service` avant le premier lancement si la création automatique n’est pas autorisée.
+Le paramètre `DOCKERHUB_NAMESPACE` est initialisé avec `willyddn` ; le modifier dans le Jenkinsfile si le compte DockerHub cible est différent. Créer les dépôts DockerHub `cast-service` et `movie-service` avant le premier lancement si la création automatique n’est pas autorisée.
 
 ## Pipeline
 

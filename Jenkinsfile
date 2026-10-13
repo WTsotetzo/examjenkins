@@ -76,7 +76,7 @@ pipeline {
     parameters {
         string(
             name: 'DOCKERHUB_NAMESPACE',
-            defaultValue: '',
+            defaultValue: 'willyddn',
             description: 'Votre namespace/identifiant DockerHub (les dépôts cast-service et movie-service doivent exister ou être créables).'
         )
     }
