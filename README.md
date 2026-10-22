@@ -53,10 +53,11 @@ Le kubeconfig de l’hôte utilise `127.0.0.1`, adresse inaccessible depuis Jenk
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass `
-  -File .\scripts\prepare-jenkins-kubeconfig.ps1
+  -File .\scripts\prepare-jenkins-kubeconfig.ps1 `
+  -ContextName docker-desktop
 ```
 
-Téléverser ensuite `.jenkins-kubeconfig` comme credential `kubeconfig` de type **Secret file**. Ce fichier contient des clés privées : il est ignoré par Git, ne pas le partager ni le committer. Le script conserve l’authentification et l’autorité de certification du kubeconfig courant, mais utilise `host.docker.internal` pour joindre le cluster depuis Jenkins.
+Téléverser ensuite `.jenkins-kubeconfig` comme credential `kubeconfig` de type **Secret file**. Ce fichier contient des clés privées : il est ignoré par Git, ne pas le partager ni le committer. Le paramètre `-ContextName` permet de sélectionner explicitement le contexte, notamment `docker-desktop` si le contexte courant est différent. Le script conserve l’authentification et l’autorité de certification du kubeconfig sélectionné, mais utilise `host.docker.internal` pour joindre le cluster depuis Jenkins.
 
 Le paramètre `DOCKERHUB_NAMESPACE` est initialisé avec `willyddn` ; le modifier dans le Jenkinsfile si le compte DockerHub cible est différent. Créer les dépôts DockerHub `cast-service` et `movie-service` avant le premier lancement si la création automatique n’est pas autorisée.
 
